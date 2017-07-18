@@ -21,6 +21,33 @@ const Notes = {
   }
 }
 
+const Editor = {
+  saveEditor(idx) {
+    return function () {
+      Notes.expandeds[idx] = 0;
+      console.log(Notes.mynotes)
+    }
+  },
+  view(vnode) {
+    return m('div', {class: 'pad-bot-1em'}, [
+      m('textarea', {
+            value: vnode.attrs.note.text,
+            rows: 6, cols: 80,
+            class: 'pad8px',
+            autofocus: true
+        }),
+      m('br'),
+      vnode.attrs.note.tags.map(tag => {
+        return [
+          m('.label .label-info ', tag),
+          m.trust(' &nbsp; &nbsp; ')
+        ]
+      }),
+      m('button', {onclick: Editor.saveEditor(vnode.attrs.i)}, ' OK ')
+    ])
+  }
+}
+
 const PostView = {
   noteExpansion(postIndex) {
     return function() {
@@ -28,7 +55,10 @@ const PostView = {
     }
   },
   view(vnode) {
-    console.log('vnode.attrs.i', vnode.attrs.i);
+    // console.log('vnode.attrs.i', vnode.attrs.i);
+    if (Notes.expandeds[vnode.attrs.i]) {
+      return m(Editor, {note: vnode.attrs.note, i: vnode.attrs.i})
+    }
     return m('.panel .panel-default',
       m('.panel-heading',
         m('span',

@@ -4,3 +4,11 @@ h3 {
 ul {
   list-style-type: none;
 }
+
+.pad-bot-1em {
+  padding-bottom: 1em;
+}
+
+.pad8px {
+  padding: 6px 8px;
+}
