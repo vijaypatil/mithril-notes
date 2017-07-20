@@ -1,16 +1,19 @@
-## My notes
+## My Mithril Notes
 
-A simple notes taking app, based on Mithril.
+A notes taking app, based on Mithril.
 
 ## App Run
 
 ```bash
-# Start the from a console.
-json-server db.json
+# Move to our data directory
+cd data
 
-# From another cosole, start the http-server
+# Start `json-server` from a console to serve our datbase. json-server listens on port 3000.
+json-server --watch db.json
+
+# From another cosole, start the http-server to server our app
 hs .
 
 # The app is available at, port 8080
 ```
-[App served at 8080](http://127.0.0.1:8080)
+[App is served in your browser at port 8080](http://127.0.0.1:8080)
