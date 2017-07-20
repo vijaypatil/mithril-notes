@@ -49,7 +49,6 @@ const Notes = {
 
   //=> Fetch from backend.
   fetchNotes() {
-    console.log('In fetchNotes()... About to make request()');
     m.request({method: 'get', url: NOTESURL}).then(
         (data) => {
           Notes.mynotes = data
@@ -115,7 +114,6 @@ const PostView = {
       Notes.expandeds[postIndex] = (Notes.expandeds[postIndex] === 0) ? 1 : 0
       if (Notes.expandeds[postIndex] === 1) {
         Notes.rec = Object.assign({}, Notes.mynotes[postIndex])
-        console.log('Notes.rec: ', Notes.rec);
       }
     }
   },
