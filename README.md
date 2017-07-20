@@ -1,14 +1,14 @@
-## My Tech Notes - A Mithril based Editor
+### My Tech Notes - A Mithril based notes editor
 
 > A notes taking app, based on Mithril.
 
-## Runtime environment setup
+### Runtime environment setup
 ```bash
 # Install our data server, made by the remarkable people at typicode.
 yarn global add json-server
 ```
 
-## App Run
+### App Run
 
 ```bash
 # From project directory

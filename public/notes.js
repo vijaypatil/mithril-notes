@@ -1,4 +1,4 @@
-/* global m */
+/* global m, R */
 
 const NOTESURL = 'http://localhost:3000/notes'
 
@@ -78,7 +78,7 @@ const Editor = {
         // console.log(JSON.stringify(result))
       })
       Notes.expandeds[idx] = 0;
-      console.log(Notes.mynotes)
+      // console.log(Notes.mynotes)
     }
   },
   view(vnode) {
@@ -102,7 +102,7 @@ const Editor = {
           value: Notes.rec.stags
         }),
       m.trust(' &nbsp; &nbsp; '),
-      m('button.btn btn-primary', {onclick: Editor.saveEditor(vnode.attrs.i)}, ' OK ')
+      m('button.btn btn-sm btn-danger', {onclick: Editor.saveEditor(vnode.attrs.i)}, ' OK ')
     ])
   }
 }
@@ -156,5 +156,4 @@ const NotesComponent = {
     )
   }
 }
-
 m.mount(document.querySelector('#app'), NotesComponent)
