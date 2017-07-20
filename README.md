@@ -22,3 +22,19 @@ json-server --watch data/db.json
 ```
 
 [Your notes will be available here.](http://127.0.0.1:3000)
+
+## App Goals
+
+1. Maintain a development diary / journal.
+1. Notes about different projects can be captured.
+1. The notes are ordered by timestamp of entry.
+1. Notes have tags.
+1. Tags can be used to filter notes.
+1. There's an exact & fuzzy search available, that can search over titles, tags & text of notes.
+1. Tags are specified as comma separated single words.
+1. Tags can have hyphens, periods, hashes or underscores.
+1. A note is markdown based - via Marked.
+1. A note is TeX enabled - via MathJax.
+1. Show some visualization about stats of the notes. D3 chats, etc.
+
+By the time the app does all of the above. I'd have a non-trivial understanding of how to use Mithril.
