@@ -4,11 +4,12 @@ h3 {
 ul {
   list-style-type: none;
 }
-
+.styled-textarea {
+  border-radius: 4px;
+  width: 100%;
+  height: 160px;
+  padding: 6px 8px;
+}
 .pad-bot-1em {
   padding-bottom: 1em;
-}
-
-.pad8px {
-  padding: 6px 8px;
 }

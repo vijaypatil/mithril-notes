@@ -5,6 +5,21 @@ const NOTESURL = 'http://localhost:3000/notes'
 const Notes = {
   mynotes: [],
   expandeds: [],
+  tags: [],
+  listAllTags(notes) {
+    const res = []
+    notes.forEach((note) => {
+      const notetags = []
+      note.tags.forEach((tag) => {
+        if (res.indexOf(tag) < 0) {
+          res.push(tag)
+          notetags.push(tag)
+        }
+      })
+      note.stags = notetags.join(', ')
+    })
+    return res
+  },
   fetchNotes() {
     console.log('In fetchNotes()... About to make request()');
     m.request({method: 'get', url: NOTESURL}).then(
@@ -13,7 +28,9 @@ const Notes = {
           for (let i = 0, n = Notes.mynotes.length; i < n; i++) {
             Notes.expandeds[i] = 0
           }
+          Notes.tags = Notes.listAllTags(Notes.mynotes)
           console.log(JSON.stringify(data));
+          console.log(JSON.stringify(Notes.tags));
         },
         (error) => {
           console.log('Error fetching notes.' + error);
@@ -32,18 +49,16 @@ const Editor = {
     return m('div', {class: 'pad-bot-1em'}, [
       m('textarea', {
             value: vnode.attrs.note.text,
-            rows: 6, cols: 80,
-            class: 'pad8px',
+            class: 'styled-textarea',
             autofocus: true
         }),
       m('br'),
-      vnode.attrs.note.tags.map(tag => {
-        return [
-          m('.label .label-info ', tag),
-          m.trust(' &nbsp; &nbsp; ')
-        ]
-      }),
-      m('button', {onclick: Editor.saveEditor(vnode.attrs.i)}, ' OK ')
+      m('input.input[type=text][placeholder=tags, comma separated]', {
+          style: 'padding: 6px; border-radius: 6px',
+          value: vnode.attrs.note.stags
+        }),
+      m.trust(' &nbsp; &nbsp; '),
+      m('button.btn btn-primary', {onclick: Editor.saveEditor(vnode.attrs.i)}, ' OK ')
     ])
   }
 }
