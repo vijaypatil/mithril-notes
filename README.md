@@ -2,30 +2,23 @@
 
 > A note taking app, based on Mithril.
 
-## Runtime environment
+## Runtime environment setup
 ```bash
 # Install our data server, made by the remarkable people at typicode.
 yarn global add json-server
-
-# Install a web server, to serve some our app.
-yarn gloabl add http-server
 ```
 
 ## App Run
 
 ```bash
-# Move to our data directory
-cd data
+# From project directory
+# Start `json-server` to serve our database. It listens on port 3000.
+json-server --watch data/db.json
 
-# Start `json-server` from a console to serve our datbase. It listens on port 3000.
-json-server --watch db.json
-
-# From another cosole, move back to data's parent directory
-cd ..
-
-# Start the http-server to server our app
-hs .
-
-# The app is available at, port 8080
+# There's no need for a separate http server.
+# It turns out that `json-server` handles the http server functionality too!
+# json-server will serve files from ./public/index.html
+# Our app (notes.js) will be a one-file app for a long time to come- thanks to Mithril. :o)
 ```
-[App is served in your browser at port 8080](http://127.0.0.1:8080)
+
+[Your notes will be available at this page.](http://127.0.0.1:3000)
