@@ -26,12 +26,12 @@ const updateAllStags = (notes) => {
 }
 
 const tagsToArray = (notesRec) => {
-  console.log('notesRec ' + JSON.stringify(notesRec));
+  // console.log('notesRec ' + JSON.stringify(notesRec));
   let res = []
   if (notesRec.stags) {
     res = notesRec.stags.split(',').map((tag) => (tag.trim()))
   }
-  console.log(JSON.stringify(notesRec));
+  // console.log(JSON.stringify(notesRec));
   return res
 }
 
@@ -52,7 +52,6 @@ const Notes = {
     m.request({method: 'get', url: NOTESURL}).then(
         (data) => {
           Notes.mynotes = data
-          // console.log('Data fetched: ' + JSON.stringify(Notes.mynotes, 0, 2));
           for (let i = 0, n = Notes.mynotes.length; i < n; i++) {
             Notes.expandeds[i] = 0
           }
@@ -76,7 +75,7 @@ const Editor = {
         data: Notes.rec
       }).then((result) => {
         Notes.mynotes[idx] = Notes.rec
-        console.log(JSON.stringify(result))
+        // console.log(JSON.stringify(result))
       })
       Notes.expandeds[idx] = 0;
       console.log(Notes.mynotes)
@@ -152,27 +151,10 @@ const NotesComponent = {
       m('h2', 'Notes'),
         Notes.mynotes.map((note, i) => {
           return m(PostView, {note, i})
-        }) // map items.
-      ] // .children of .notes
-    ) // .notes
+        })
+      ]
+    )
   }
 }
-
-/**
- * Greeting Mithril Component.
- */
-/* eslint-disable */
-const Greeting = {
-  view() {
-    return m('.greeting', [
-      m('h3', 'The vap notes'),
-      m('p', `Here I expect to show several of my notes.`),
-      m('p', `There'll be a large series of them, let's see how it goes...`)
-    ])
-  }
-}
-
-// m.render(document.querySelector('#app'),
-//          m('h3', 'Hello, these are my notes.'))
 
 m.mount(document.querySelector('#app'), NotesComponent)
