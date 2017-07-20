@@ -1,6 +1,15 @@
-## My Mithril Notes
+## My Mithril Notes Editor
 
-A notes taking app, based on Mithril.
+> A note taking app, based on Mithril.
+
+## Runtime environment
+```bash
+# Install our data server, made by the remarkable people at typicode.
+yarn global add json-server
+
+# Install a web server, to serve some our app.
+yarn gloabl add http-server
+```
 
 ## App Run
 
@@ -8,10 +17,13 @@ A notes taking app, based on Mithril.
 # Move to our data directory
 cd data
 
-# Start `json-server` from a console to serve our datbase. json-server listens on port 3000.
+# Start `json-server` from a console to serve our datbase. It listens on port 3000.
 json-server --watch db.json
 
-# From another cosole, start the http-server to server our app
+# From another cosole, move back to data's parent directory
+cd ..
+
+# Start the http-server to server our app
 hs .
 
 # The app is available at, port 8080
