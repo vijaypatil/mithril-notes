@@ -1,6 +1,6 @@
-## My Mithril Notes Editor
+## My Tech Notes - A Mithril based Editor
 
-> A note taking app, based on Mithril.
+> A notes taking app, based on Mithril.
 
 ## Runtime environment setup
 ```bash
@@ -21,4 +21,4 @@ json-server --watch data/db.json
 # Our app (notes.js) will be a one-file app for a long time to come- thanks to Mithril. :o)
 ```
 
-[Your notes will be available at this page.](http://127.0.0.1:3000)
+[Your notes will be available here.](http://127.0.0.1:3000)
