@@ -1,38 +1,42 @@
 {
   "notes": [
     {
-      "id": 1,
-      "title": "First note",
-      "text": "This is the first note",
+      "title": "First neat note",
+      "text": "Updated properly?\n\nLet's see how this looks now...",
       "tags": [
-        "intro",
-        "note"
-      ]
+        "note",
+        "observation"
+      ],
+      "id": 1
     },
     {
       "id": 2,
       "title": "Second note",
-      "text": "This is the second note",
+      "text": "Checking for changes in tags\n\nCheck some output.\n\nWhat do you think of that?",
       "tags": [
-        "cs",
-        "note"
+        "one",
+        "two",
+        "four"
       ]
     },
     {
       "id": 3,
       "title": "Third note",
-      "text": "This is the third note",
+      "text": "This is the third note\n\nAnd, so it is cool!",
       "tags": [
         "link",
-        "note"
+        "one",
+        "three"
       ]
     },
     {
       "id": 4,
-      "title": "Fourth note",
-      "text": "This is the fourth note",
+      "title": "Fourth note - edited.",
+      "text": "This is the fourth note.\n\nAnd, one more sentence.",
       "tags": [
-        "ml"
+        "ml",
+        "cs",
+        "math"
       ]
     }
   ]

@@ -9,6 +9,9 @@ ul {
   width: 100%;
   height: 160px;
   padding: 6px 8px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  white-space: pre-line;
 }
 .pad-bot-1em {
   padding-bottom: 1em;
