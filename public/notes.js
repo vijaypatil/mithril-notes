@@ -1,6 +1,6 @@
-/* global m, R */
+/* global m */
 
-const NOTESURL = 'http://localhost:3000/notes'
+const NOTESURL = 'http://localhost:3000/notes/'
 
 /**
  * Each `note` element is updated with a .stag property.
@@ -25,13 +25,15 @@ const updateAllStags = (notes) => {
   return res
 }
 
+/**
+ * Converts: "one, two, three" to ["one", "two", "three"]
+ * @param {[String]} res - String Array, from comma-separated of notesRec.stags string.
+ */
 const tagsToArray = (notesRec) => {
-  // console.log('notesRec ' + JSON.stringify(notesRec));
   let res = []
   if (notesRec.stags) {
     res = notesRec.stags.split(',').map((tag) => (tag.trim()))
   }
-  // console.log(JSON.stringify(notesRec));
   return res
 }
 
@@ -66,16 +68,16 @@ const Notes = {
 const Editor = {
   saveEditor(idx) {
     return function () {
-      Notes.rec.tags = tagsToArray(Notes.rec) // Notes.setTags(Notes.rec.stags)
+      Notes.rec.tags = tagsToArray(Notes.rec)
       delete Notes.rec.stags
       Notes.mynotes[idx] = Notes.rec
       m.request({
         method: 'put',
-        url: NOTESURL + '/' + Notes.mynotes[idx].id,
+        url: NOTESURL + Notes.mynotes[idx].id,
         data: Notes.rec
       }).then((result) => {
         Notes.mynotes[idx] = Notes.rec
-        // console.log(JSON.stringify(result))
+        console.log(JSON.stringify(result))
       })
       Notes.expandeds[idx] = 0;
       // console.log(Notes.mynotes)
@@ -117,11 +119,13 @@ const PostView = {
     }
   },
   view(vnode) {
-    //=> Display the Editor.
+
+    //=> Display Editor for the Note.
     if (Notes.expandeds[vnode.attrs.i]) {
       return m(Editor, {note: vnode.attrs.note, i: vnode.attrs.i})
     }
-    // Display the Note in a panel.
+
+    // Display Note in a panel.
     return m('.panel .panel-default',
       m('.panel-heading', {onclick: PostView.noteExpansion(vnode.attrs.i)},
         m('span',
@@ -130,16 +134,16 @@ const PostView = {
       m('.panel-body', [
         m('span', {style: 'white-space: pre-line;'}, vnode.attrs.note.text),
         m('div', {style: 'padding-top:0.5em'},
-          (vnode.attrs.note.tags)
-            ? vnode.attrs.note.tags.map((tag) => {
-                return m('span', [
-                  m('.label label-info', tag),
-                  m.trust(' &nbsp; ')
-                ])
-              })
-            : null// tag entries.
+          (vnode.attrs.note.tags) ? // this note has tags!
+              vnode.attrs.note.tags.map((tag) => (
+                      m('span', [
+                        m('.label label-info', tag),
+                        m.trust(' &nbsp; ')
+                      ])
+                  )) : // no tags in this note. Mithril is happy with null
+              null
         )
-      ]) // panel body
+      ])
     )
   }
 }
@@ -149,9 +153,7 @@ const NotesComponent = {
   view() {
     return m('.notes', [
       m('h2', 'Notes'),
-        Notes.mynotes.map((note, i) => {
-          return m(PostView, {note, i})
-        })
+        Notes.mynotes.map((note, i) => (m(PostView, {note, i})))
       ]
     )
   }

@@ -11,12 +11,12 @@
     },
     {
       "id": 2,
-      "title": "Second note",
-      "text": "Checking for changes in tags\n\nCheck some output.\n\nWhat do you think of that?",
+      "title": "Note # 2",
+      "text": "Checking updates - via the PUT verb.\n",
       "tags": [
         "one",
         "two",
-        "four"
+        "three"
       ]
     },
     {

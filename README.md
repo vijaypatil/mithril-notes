@@ -25,7 +25,7 @@ json-server --watch data/db.json
 
 ## App Goals
 
-1. Maintain a development diary / journal.
+1. Used to maintain a development diary / journal.
 1. Notes about different projects can be captured.
 1. The notes are ordered by timestamp of entry.
 1. Notes have tags.
