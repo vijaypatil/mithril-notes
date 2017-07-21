@@ -25,16 +25,16 @@ json-server --watch data/db.json
 
 ## App Goals
 
-1. Used to maintain a development diary / journal.
-1. Notes about different projects can be captured.
-1. The notes are ordered by creation timestamp.
-1. There's an exact & fuzzy search available, that can search over titles, tags & text of notes.
-1. Notes have tags.
-1. Tags can be used to filter Notes.
-1. Tags are specified as comma separated single words.
-1. Tags can have hyphens, periods, hashes or underscores.
-1. A note is markdown based - via Marked.
-1. A note is TeX enabled - via MathJax.
-1. There are visualizations about stats for the Notes - via D3 charts.
+1. [ ] Used to maintain a development diary / journal.
+1. [ ] Notes about different projects can be captured.
+1. [ ] The notes are ordered by creation timestamp.
+1. [ ] There's an exact & fuzzy search available, that can search over titles, tags & text of notes.
+1. [ ] Notes have tags.
+1. [ ] Tags can be used to filter Notes.
+1. [ ] Tags are specified as comma separated single words.
+1. [ ] Tags can have hyphens, periods, hashes or underscores.
+1. [ ] A note is markdown based - via Marked.
+1. [ ] A note is TeX enabled - via MathJax.
+1. [ ] There are visualizations about stats for the Notes - via D3 charts.
 
-By the time the app does all of the above. I'd have a non-trivial understanding of how to use Mithril.
+By the time the app does all of the above, I'll have a non-trivial understanding of how to put Mithril to good use.
