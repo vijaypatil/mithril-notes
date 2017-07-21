@@ -152,8 +152,10 @@ const NotesComponent = {
   oninit: Notes.fetchNotes,
   view() {
     return m('.notes', [
-      m('h2', 'Notes'),
-        Notes.mynotes.map((note, i) => (m(PostView, {note, i})))
+      m('h3', 'Tech Journal'),
+        (Notes.mynotes.length === 0)
+          ? m('.well well-lg', 'There are no Notes in your Journal, yet.')
+          : Notes.mynotes.map((note, i) => (m(PostView, {note, i})))
       ]
     )
   }
