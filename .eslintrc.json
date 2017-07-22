@@ -56,7 +56,7 @@
         "dot-notation": "off",
         "eol-last": [
             "error",
-            "never"
+            "always"
         ],
         "eqeqeq": "off",
         "for-direction": "error",
@@ -273,8 +273,8 @@
         "switch-colon-spacing": [
             "error",
             {
-                "after": true,
-                "before": false
+                "after": false,
+                "before": true
             }
         ],
         "symbol-description": "error",

@@ -7,7 +7,7 @@ ul {
 .styled-textarea {
   border-radius: 4px;
   width: 100%;
-  height: 160px;
+  height: 120px;
   padding: 6px 8px;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
@@ -15,4 +15,7 @@ ul {
 }
 .pad-bot-1em {
   padding-bottom: 1em;
+}
+.highlight {
+  background: silver;
 }
