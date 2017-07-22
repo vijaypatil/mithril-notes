@@ -1,6 +1,6 @@
-### My Tech Notes - A Mithril based notes editor
+### A Journal editor built using Mithril
 
-> A notes taking app, based on Mithril.
+> The intent is to manage dev notes.
 
 ### Runtime environment setup
 ```bash
@@ -12,16 +12,14 @@ yarn global add json-server
 
 ```bash
 # From project directory
-# Start `json-server` to serve our database. It listens on port 3000.
-json-server --watch data/db.json
+# The script:
+./journal.sh
 
-# There's no need for a separate http server.
-# It turns out that `json-server` handles the http server functionality too!
-# json-server will serve files from ./public/index.html
-# Our app (notes.js) will be a one-file app for a long time to come- thanks to Mithril. :o)
+# The above command server our app & data with: `json-server --watch data/db.json`
+# json-server serves our app & files from ./public/index.html
 ```
 
-[Your app will be available at: http://127.0.0.1:3000](http://127.0.0.1:3000)
+Your journal will be at this address: [http://localhost:3000](http://localhost:3000)
 
 ## App Goals
 
