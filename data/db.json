@@ -2,14 +2,14 @@
   "notes": [
     {
       "title": "Test for date setting",
-      "text": "Updated properly?\nCheck update of write time.\nThird line.\nLine four",
+      "text": "Updated properly?\nCheck update of write time.\nThird line.\nLine four.",
       "tags": [
-        "note",
+        "one",
         "three",
         "two"
       ],
       "id": "3376759d-5be2-21b2-d31e-aca2d11e9aeb",
-      "created": "2017-07-24T02:54:28.171Z"
+      "created": "2017-07-24T05:17:29.388Z"
     },
     {
       "id": "a37c6069-3368-dabb-7d09-5baa72e90546",

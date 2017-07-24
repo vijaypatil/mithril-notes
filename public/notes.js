@@ -183,6 +183,12 @@ const PostView = {
       }
     }
   },
+  setUpEditHandler(noteIndex) {
+    return {
+      onclick: PostView.noteExpansion(noteIndex),
+      title: 'Click to edit this note'
+    }
+  },
   view(vnode) {
     //=> Display Editor for the Note.
     if (Notes.expandeds[vnode.attrs.i]) {
@@ -195,16 +201,11 @@ const PostView = {
           onmouseleave: lightBackground
         },
         m('span',
-            m('span', {
-                    onclick: PostView.noteExpansion(vnode.attrs.i),
-                    title: 'Click to edit this note'
-                },
+            m('span',
+                PostView.setUpEditHandler(vnode.attrs.i),
                 vnode.attrs.note.title),
             m('span.pull-right', [
-              m('span', {
-                      onclick: PostView.noteExpansion(vnode.attrs.i),
-                      title: 'Click to edit this note'
-                  },
+              m('span', PostView.setUpEditHandler(vnode.attrs.i),
                   new Date(vnode.attrs.note.created).toLocaleString()),
               m.trust(' &nbsp; &nbsp; '),
               m('span.glyphicon.glyphicon-pencil', {
