@@ -52,7 +52,7 @@
         "consistent-this": "off",
         "curly": "off",
         "default-case": "off",
-        "dot-location": "error",
+        "dot-location": "off",
         "dot-notation": "off",
         "eol-last": [
             "error",
@@ -99,8 +99,8 @@
             "never"
         ],
         "newline-before-return": "off",
-        "newline-per-chained-call": "error",
-        "no-alert": "error",
+        "newline-per-chained-call": "off",
+        "no-alert": "off",
         "no-array-constructor": "error",
         "no-await-in-loop": "error",
         "no-bitwise": "error",
@@ -140,7 +140,7 @@
         "no-mixed-operators": "off",
         "no-mixed-requires": "error",
         "no-multi-assign": "off",
-        "no-multi-spaces": "error",
+        "no-multi-spaces": "off",
         "no-multi-str": "error",
         "no-multiple-empty-lines": "error",
         "no-native-reassign": "error",
