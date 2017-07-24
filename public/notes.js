@@ -13,7 +13,6 @@ const updateAllStags = (notes) => {
   notes.forEach((note) => {
     const notetags = []
     if (note.tags) {
-      console.log(note.tags);
       note.tags.forEach((tag) => {
         const xtag = tag.trim()
         if (xtag.length > 0) {
@@ -25,7 +24,6 @@ const updateAllStags = (notes) => {
       })
     }
     note.stags = notetags.join(', ')
-    console.log('notes.stags: ', note.stags)
   })
   return res
 }
@@ -49,7 +47,7 @@ const tagsToString = (tags) => {
 const tagsToArray = (notesRec) => {
   let res = []
   if (notesRec.stags) {
-    res = notesRec.stags.split(',').map((tag) => (tag.trim())).filter(tag => (tag.length > 0))
+    res = notesRec.stags.split(',').map((tag) => (tag.trim())).filter((tag) => (tag.length > 0))
     console.log('res: ', res);
     res.sort()
   }
@@ -57,10 +55,11 @@ const tagsToArray = (notesRec) => {
 }
 
 const Notes = {
-  mynotes: [],
-  expandeds: [],
-  tags: [],
-  rec: {},
+  mynotes: [],      // Our notes are here.
+  expandeds: [],    // Indicates which notes are in the edit mode
+  tags: [],         // all of tags from all of the notes.
+  rec: {},          // current note being edited.
+  isNew: false,     // Are we editing an existing note, or making a new one.
 
   //=> Editor updates.
   setTitle: (v) => {Notes.rec.title = v},
@@ -70,26 +69,43 @@ const Notes = {
 
   //=> Fetch from backend.
   fetchNotes() {
-    m.request({method: 'get', url: NOTESURL}).then(
-        (data) => {
-          Notes.mynotes = data
-          for (let i = 0, n = Notes.mynotes.length; i < n; i++) {
-            Notes.expandeds[i] = 0
-            Notes.mynotes[i].tags.sort()
-          }
-          updateAllStags(Notes.mynotes)
-        },
-        (error) => {
-          console.log('Error fetching notes.' + error);
+    m.request({method: 'get', url: NOTESURL})
+        .then((data) => {
+            Notes.mynotes = data
+            for (let i = 0, n = Notes.mynotes.length; i < n; i++) {
+              Notes.expandeds[i] = 0
+              Notes.mynotes[i].tags.sort()
+            }
+            updateAllStags(Notes.mynotes)
+        }).catch((error) => {
+            console.log('Error fetching notes.' + error.message);
         })
+  },
+
+  //=> Delete note.
+  deleteNote(index) { // index = which note to delete from Notes.mynotes
+    return (e) => {
+      e.preventDefault()
+      if (confirm('Delete this note?')) {
+        const id = Notes.mynotes[index].id
+        m.request({method: 'delete', url: NOTESURL + id})
+          .then(() => {
+              Notes.mynotes.splice(index, 1)
+              updateAllStags(Notes.mynotes)
+          }).catch((error) => {
+              console.log('Error deleting note:', index, error.message);
+          })
+      }
+    }
   }
+
 }
 
 const Editor = {
   saveEditor(idx) {
     return function () {
       Notes.rec.tags = tagsToArray(Notes.rec)
-      Notes.rec.created = new Date().toString()
+      Notes.rec.created = new Date().toISOString()
       const newrec = Object.assign({}, Notes.rec)
       delete newrec.stags
       Notes.mynotes[idx] = Notes.rec
@@ -110,7 +126,6 @@ const Editor = {
         console.log(JSON.stringify(result))
       })
       Notes.expandeds[idx] = 0
-      // console.log(Notes.mynotes)
     }
   },
   cancelEditor(idx) {
@@ -148,12 +163,14 @@ const Editor = {
 
 // Indicate that we are clickable/selectable
 const darkBackground = (e) => {
-  e.target.style.background = 'silver' // #c0c0c0' // silver.
+  e.target.style.background = 'silver'
+  e.target.style.color = 'white'
 }
 
 // Indicate that we are clickable/selectable
 const lightBackground = (e) => {
   e.target.style.background = 'lightgray'
+  e.target.style.color = 'black'
 }
 
 const PostView = {
@@ -174,16 +191,33 @@ const PostView = {
     // Display Note in a panel.
     return m('.panel .panel-default',
       m('.panel-heading', {
-        onclick: PostView.noteExpansion(vnode.attrs.i),
-        onmouseenter: darkBackground,
-        onmouseleave: lightBackground
-      },
+          onmouseenter: darkBackground,
+          onmouseleave: lightBackground
+        },
         m('span',
-            vnode.attrs.note.title,
+            m('span', {
+                    onclick: PostView.noteExpansion(vnode.attrs.i),
+                    title: 'Click to edit this note'
+                },
+                vnode.attrs.note.title),
             m('span.pull-right', [
-              m('span', vnode.attrs.note.created),
-              // m.trust(' &nbsp; &nbsp; ')
-              // m('span.glyphicon.glyphicon-flash', {'aria-hidden': 'true'})
+              m('span', {
+                      onclick: PostView.noteExpansion(vnode.attrs.i),
+                      title: 'Click to edit this note'
+                  },
+                  new Date(vnode.attrs.note.created).toLocaleString()),
+              m.trust(' &nbsp; &nbsp; '),
+              m('span.glyphicon.glyphicon-pencil', {
+                  'aria-hidden': true,
+                  'onclick': PostView.noteExpansion(vnode.attrs.i),
+                  title: 'Click to edit this note'
+              }),
+              m.trust(' &nbsp; &nbsp; '),
+              m('span.glyphicon.glyphicon-remove', {
+                  'aria-hidden': true,
+                  'onclick': Notes.deleteNote(vnode.attrs.i),
+                   title: 'Click to delete this note'
+                })
             ])
           )),
       m('.panel-body', [
@@ -207,12 +241,14 @@ const NotesComponent = {
   oninit: Notes.fetchNotes,
   view() {
     return m('.notes', [
-      m('h3', 'Tech Journal'),
+        m('h3', 'Journal', [
+            m.trust(' &nbsp; &nbsp; '),
+            m('button.btn.btn-sm.btn-info', {onclick: () => {console.log("Got clicked...")}}, 'New Note')
+          ]),
         (Notes.mynotes.length === 0)
           ? m('.well well-lg', 'There are no Notes in your Journal, yet.')
           : Notes.mynotes.map((note, i) => (m(PostView, {note, i})))
-      ]
-    )
+    ])
   }
 }
 m.mount(document.querySelector('#app'), NotesComponent)
